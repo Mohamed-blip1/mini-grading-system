@@ -1,44 +1,43 @@
-# Prerequisites
-*.d
+# -------------------------------
+# C++ Build Artifacts
+# -------------------------------
 
-# Compiled Object files
-*.slo
-*.lo
+# Object files
 *.o
 *.obj
+*.lo
+*.slo
 
-# Precompiled Headers
+# Precompiled headers
 *.gch
 *.pch
 
-# Linker files
-*.ilk
+# Static libraries
+*.a
+*.lib
+*.lai
+*.la
 
-# Debugger Files
-*.pdb
-
-# Compiled Dynamic libraries
+# Dynamic/shared libraries
 *.so
 *.dylib
 *.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
 
 # Executables
 *.exe
 *.out
 *.app
 
-# debug information files
+# Linker files
+*.ilk
+
+# Debugger files
+*.pdb
 *.dwo
 
-# json
+# Fortran module files
+*.mod
+*.smod
+
+# JSON output (if you don’t want it in git)
 *.json

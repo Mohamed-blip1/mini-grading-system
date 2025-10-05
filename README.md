@@ -45,17 +45,17 @@ Class average: 67.35
 With make file:
 
 ```
-make
+make release   # For: optimized build
+make debug     # For: debug mode
+make clean     # For: clean build directory
 ```
-
+Then:
+```
+./build/student_system      # Linux
+./build/student_system.exe  # Windows
+```
 Manually:
 
 ```
-g++ -std=c++20 main.cpp -o main 
-```
-Then:
-
-```
-./main.exe # Windows
-./main     # Linux
+g++ -std=c++20 -Iinclude src/main.cpp -O3 -pthread -o build/student_system && ./build/student_system
 ```
