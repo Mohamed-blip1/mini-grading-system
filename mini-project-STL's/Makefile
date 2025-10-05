@@ -1,12 +1,31 @@
 CXX = g++
-CXXFLAGS = -O3 -Wall -Werror -pedantic -std=c++20 -Iinclude
+CXXFLAGS = -Wall -Werror -pedantic -std=c++20 -Iinclude
 LDFLAGS = -ltbb -pthread
 
-main: main.o
-	${CXX} $^ -o $@ ${LDFLAGS}
+SRC_DIR = src
+BUILD_DIR = build
+TARGET = $(BUILD_DIR)/student_system
 
-main.o: main.cpp 
-	${CXX} ${CXXFLAGS} -c $< -o $@
+SRC = $(wildcard $(SRC_DIR)/*.cpp)
+OBJ = $(SRC:$(SRC_DIR)/%.cpp=$(BUILD_DIR)/%.o)
+
+all: release
+
+release: CXXFLAGS += -O3
+release: $(TARGET)
+
+debug: CXXFLAGS += -O0 -g -DDEBUG
+debug: $(TARGET)
+
+$(TARGET): $(OBJ)
+	@mkdir -p $(BUILD_DIR)
+	$(CXX) $^ -o $@ $(LDFLAGS)
+
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@mkdir -p $(BUILD_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f main main.o
+	rm -rf $(BUILD_DIR)
+
+.PHONY: all release debug clean
