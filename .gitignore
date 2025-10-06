@@ -43,4 +43,7 @@
 *.json
 
 # Build files
-build/
+/build/
+*.o
+*.exe
+*.out
