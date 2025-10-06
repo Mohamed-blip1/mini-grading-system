@@ -1,73 +1,34 @@
-# CXX = g++
-# CXXFLAGS = -Wall -Werror -pedantic -std=c++20 -Iinclude
-# LDFLAGS = -ltbb -pthread
+# Makefile
+GXX = g++
+CXXFLAGS = -Wall -Werror -std=c++20 -Iinclude
 
-# SRC_DIR = src
-# BUILD_DIR = build
-# TARGET = $(BUILD_DIR)/student_system
+BUILD_DIR= build
+TARGET = $(BUILD_DIR)/main
 
-# SRC = $(wildcard $(SRC_DIR)/*.cpp)
-# OBJ = $(SRC:$(SRC_DIR)/%.cpp=$(BUILD_DIR)/%.o)
-
-# all: release
-
-# release: CXXFLAGS += -O3
-# release: $(TARGET)
-
-# debug: CXXFLAGS += -O0 -g -DDEBUG
-# debug: $(TARGET)
-
-# $(TARGET): $(OBJ)
-# 	@mkdir -p $(BUILD_DIR)
-# 	$(CXX) $^ -o $@
-# # 	$(CXX) $^ -o $@ $(LDFLAGS)
-
-# $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
-# 	@mkdir -p $(BUILD_DIR)
-# 	$(CXX) $(CXXFLAGS) -c $< -o $@
-
-# clean:
-# 	rm -rf $(BUILD_DIR)
-
-# .PHONY: all release debug clean
-
-# Compiler and flags
-CXX = g++
-CXXFLAGS = -Wall -Werror -pedantic -std=c++20 -Iinclude
-LDFLAGS = -pthread
-
-# Directories
-SRC_DIR = src
-BUILD_DIR = build
-TARGET = $(BUILD_DIR)/student_system
-
-# Source and object files
-SRC = $(wildcard $(SRC_DIR)/*.cpp)
-OBJ = $(SRC:$(SRC_DIR)/%.cpp=$(BUILD_DIR)/%.o)
-
-# Default target
 all: release
 
-# Release build
 release: CXXFLAGS += -O3
 release: $(TARGET)
 
-# Debug build
+# Debug
 debug: CXXFLAGS += -O0 -g -DDEBUG
 debug: $(TARGET)
 
-# Linking rule
-$(TARGET): $(OBJ)
+# Link
+$(TARGET) : $(BUILD_DIR)/main.o $(BUILD_DIR)/student.o
 	@mkdir -p $(BUILD_DIR)
-	$(CXX) $^ -o $@ $(LDFLAGS)
+	$(GXX) $^ -o $@
 
-# Compilation rule (.cpp → .o)
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
+# Compile
+$(BUILD_DIR)/main.o : src/main.cpp
 	@mkdir -p $(BUILD_DIR)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(GXX) $(CXXFLAGS) -c $< -o $@
 
-# Clean rule
+$(BUILD_DIR)/student.o : src/student.cpp
+	@mkdir -p $(BUILD_DIR)
+	$(GXX) $(CXXFLAGS) -c $< -o $@
+
 clean:
 	rm -rf $(BUILD_DIR)
 
-.PHONY: all release debug clean
+.PHONY: clean all release debug

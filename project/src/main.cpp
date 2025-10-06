@@ -1,40 +1,17 @@
 // main.cpp
-#include <iostream>
-#include <vector>
+#include "debug_time.h"
 #include <algorithm>
-#include <numeric>
-#include <chrono>
 #include "student.h"
+#include <iostream>
+#include <numeric>
+#include <vector>
+#include <chrono>
 
 constexpr int point = 1;
 constexpr int bonus = 10;
 constexpr int cap_Borderline = 80;
 constexpr int students_number = 100;
 constexpr int bottom_Borderline = 50;
-
-#ifdef DEBUG
-struct Time
-{
-    using steady_clock = std::chrono::steady_clock;
-    using duration = std::chrono::duration<double, std::micro>;
-    std::string name_;
-    steady_clock::time_point tp_;
-
-    Time(const std::string &st) noexcept
-    {
-        name_ = st;
-        tp_ = steady_clock::now();
-    };
-
-    ~Time() noexcept
-    {
-        auto elapsed = steady_clock::now();
-        std::cout << "time of '" << name_ << "': "
-                  << duration(elapsed - tp_).count()
-                  << "μs\n";
-    };
-};
-#endif
 
 int main()
 {

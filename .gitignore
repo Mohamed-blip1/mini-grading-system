@@ -41,3 +41,6 @@
 
 # JSON output (if you don’t want it in git)
 *.json
+
+# Build files
+build/

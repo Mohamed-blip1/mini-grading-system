@@ -51,11 +51,11 @@ make clean     # For: clean build directory
 ```
 Then:
 ```
-./build/student_system      # Linux
-./build/student_system.exe  # Windows
+./build/main      # Linux
+./build/main.exe  # Windows
 ```
 Manually:
 
 ```
-g++ -std=c++20 -Iinclude src/main.cpp -O3 -pthread -o build/student_system && ./build/student_system
+g++ -std=c++20 -Iinclude src/main.cpp -O3 -pthread -o build/main && ./build/main
 ```
